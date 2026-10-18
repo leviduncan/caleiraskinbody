@@ -65,8 +65,7 @@ export interface SeoContent {
 }
 
 export interface BookingContent {
-  /** The Cal.com link every "Book" button uses. */
-  url: string;
+  /** Label of the general booking buttons. They open the Cal.com popup (see src/config/cal.ts). */
   label: string;
 }
 
@@ -107,6 +106,13 @@ export interface Service {
   duration: string;
   /** Leave out while the category is coming soon. */
   price?: string;
+  /** False hides the booking button. Only coming-soon services are false. */
+  bookable: boolean;
+  /**
+   * The Cal.com event slug, for example "60min", opened as caleira/60min.
+   * Leave out until the event type exists: the button then opens the general caleira page.
+   */
+  calSlug?: string;
   description: string;
   /** Shown after the "Ideal for" label. */
   idealFor?: string;
@@ -299,8 +305,6 @@ export const site: SiteContent = {
   },
 
   booking: {
-    // TODO: replace with the real Cal.com link.
-    url: "https://cal.com/[username]/[event]",
     label: "Book now",
   },
 
@@ -376,6 +380,8 @@ export const site: SiteContent = {
             name: "CALÉIRA Signature Facial",
             duration: "60 min",
             price: "$150",
+            bookable: true,
+            calSlug: "60min",
             description:
               "A personalized European-inspired facial that cleanses, exfoliates, hydrates, and nourishes. Includes a customized skin assessment, gentle exfoliation, a relaxing facial massage, a targeted mask, and finishing skincare.",
             idealFor: "Guests who want fresh, healthy-looking skin and a steady skincare routine.",
@@ -385,6 +391,8 @@ export const site: SiteContent = {
             name: "CALÉIRA Facial Sculpt",
             duration: "60 min",
             price: "$175",
+            bookable: true,
+            calSlug: "caleira-facial-sculpt",
             description:
               "A sculpting facial with targeted massage techniques and deep hydration, designed to leave you feeling relaxed with a refreshed, rested look.",
             idealFor: "Special events and a little extra facial relaxation.",
@@ -407,6 +415,8 @@ export const site: SiteContent = {
             name: "CALÉIRA Brazilian Wax",
             duration: "30 min",
             price: "$75",
+            bookable: true,
+            calSlug: "caleira-brazilian-wax",
             description:
               "A professional Brazilian wax that emphasizes precision, hygiene, comfort, and discretion, leaving skin feeling smooth and well cared for.",
             idealFor: "Guests who want consistent grooming and lasting smoothness.",
@@ -415,6 +425,7 @@ export const site: SiteContent = {
             name: "CALÉIRA Executive Grooming",
             duration: "30 min",
             price: "$65",
+            bookable: true,
             description:
               "A quick, polished grooming visit with professional eyebrow shaping and your choice of upper-lip or chin waxing, finished with soothing post-wax care.",
             idealFor: "Busy professionals who want a polished look without a long appointment.",
@@ -440,6 +451,7 @@ export const site: SiteContent = {
           {
             name: "CALÉIRA Signature Massage",
             duration: "90 min",
+            bookable: false,
             description:
               "A 90-minute full-body massage tailored to your pressure and preferences. Launching soon.",
           },
@@ -464,6 +476,7 @@ export const site: SiteContent = {
           {
             name: "CALÉIRA Sculpt 360",
             duration: "75 min",
+            bookable: false,
             description:
               "A personalized body-care experience that pairs studio-grade technology with calm, unhurried care. Launching soon.",
           },
