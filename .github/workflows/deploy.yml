@@ -1,0 +1,61 @@
+name: Deploy site via FTP
+
+on:
+  push:
+    branches:
+      - main
+  # Lets you re-deploy from the Actions tab without pushing a commit.
+  workflow_dispatch:
+
+# If you push twice quickly, cancel the older run — two concurrent uploads to
+# the same directory would corrupt each other's sync state.
+concurrency:
+  group: deploy-ftp
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          # Next 16 requires Node 20.9+; 22 matches what the site builds with locally.
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build static site
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+
+      # next.config.ts sets output: "export", so the build writes plain files to
+      # out/: index.html, 404.html, _next/ (JS, CSS, fonts, images) and the icons.
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Explicit FTPS. If your host does not support TLS, change this to
+          # "ftp" — but that sends your password in cleartext.
+          protocol: ftps
+          # Trailing slashes are required by this action.
+          local-dir: ./out/
+          # The folder your domain serves from, relative to the FTP login's home.
+          # Often /public_html/ on cPanel hosts; / if the FTP account is already
+          # rooted at the web folder.
+          server-dir: ${{ secrets.FTP_SERVER_DIR || '/' }}
+          # Keeps a manifest on the server so each deploy uploads only changed
+          # files instead of re-sending every image each time.
+          state-name: .ftp-deploy-sync-state.json

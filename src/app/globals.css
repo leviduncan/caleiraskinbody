@@ -1,0 +1,334 @@
+@import "tailwindcss";
+
+/*
+  Design tokens, from the CALÉIRA design system (Coquina theme, v1 proposed).
+  To re-skin the site, change the primitives and fonts in this block only.
+  Components never contain hex values.
+*/
+:root {
+  color-scheme: light;
+
+  /* Layout */
+  --content-max: 1200px;
+  --gutter: 16px;
+
+  /* Brand primitives */
+  --coquina: #f5eee3;
+  --mahogany: #5a2a1b;
+  --cocoa: #2a1a13;
+  --champagne: #c8a675;
+  --tidewater: #4c695b;
+  --clay: #944e30;
+
+  /* Surfaces */
+  --surface: var(--coquina);
+  --surface-raised: #fbf7f1;
+  --surface-sunk: #ebe0cf;
+  --surface-deep: #3a1e14;
+  /* Laid over photos. The darkest brand brown (Evening surface-deep): near black, never black. */
+  --scrim: #120b08;
+
+  /* Text */
+  --ink: var(--cocoa);
+  --ink-muted: #6a5345;
+  --ink-on-deep: #f3eadf;
+  --ink-on-deep-muted: #c2af9c;
+  --champagne-ink: #7a5b32;
+
+  /* Actions */
+  --brand: var(--mahogany);
+  --brand-hover: #6e3523;
+  --on-brand: #f8f1e6;
+
+  /* Lines */
+  --line: #d9cab5;
+  --line-strong: #9a8268;
+
+  /* Status */
+  --tidewater-soft: #dce4dd;
+  --danger: #9a2e20;
+  --focus: var(--tidewater);
+
+  /* Skin tone band, light to deep. Only ever used together. */
+  --tone-1: #f3d9c6;
+  --tone-2: #e3b796;
+  --tone-3: #c98e64;
+  --tone-4: #a66b43;
+  --tone-5: #6e4128;
+  --tone-6: #3b2216;
+
+  /* Shape and depth */
+  --radius-arch: 480px;
+  --shadow-soft-value: 0 24px 48px -28px rgba(58, 30, 20, 0.35);
+
+  /* Fonts (faces are loaded in layout.tsx) */
+  --font-display-stack: var(--font-display-face), Didot, "Bodoni 72", Georgia, serif;
+  --font-sans-stack: var(--font-sans-face), Futura, "Century Gothic", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Side gutter: 16px on phones, 32px from tablets up */
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunk: var(--surface-sunk);
+  --color-surface-deep: var(--surface-deep);
+  --color-scrim: var(--scrim);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-on-deep: var(--ink-on-deep);
+  --color-ink-on-deep-muted: var(--ink-on-deep-muted);
+  --color-champagne: var(--champagne);
+  --color-champagne-ink: var(--champagne-ink);
+  --color-cocoa: var(--cocoa);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-on-brand: var(--on-brand);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-tidewater: var(--tidewater);
+  --color-tidewater-soft: var(--tidewater-soft);
+  --color-clay: var(--clay);
+  --color-danger: var(--danger);
+  --color-tone-1: var(--tone-1);
+  --color-tone-2: var(--tone-2);
+  --color-tone-3: var(--tone-3);
+  --color-tone-4: var(--tone-4);
+  --color-tone-5: var(--tone-5);
+  --color-tone-6: var(--tone-6);
+  --font-display: var(--font-display-stack);
+  --font-sans: var(--font-sans-stack);
+  /* Deliberately rounder than the design system's 2px and 6px. */
+  --radius-sm: 8px; /* buttons, inputs, badges */
+  --radius-md: 16px; /* cards and panels */
+  --shadow-soft: var(--shadow-soft-value);
+}
+
+html {
+  /* Anchor links land below the sticky header */
+  scroll-padding-top: 6.5rem;
+}
+
+body {
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans-stack);
+  font-size: 17px;
+  line-height: 28px;
+  -webkit-font-smoothing: antialiased;
+  caret-color: var(--brand);
+}
+
+/*
+  Page scrollbar in brand colors: a mahogany pill on a coquina track.
+  Chrome, Edge and Safari take the ::-webkit rules. Firefox has no equivalent,
+  so it gets the two colors through scrollbar-color.
+*/
+html::-webkit-scrollbar {
+  width: 14px;
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--surface-sunk);
+}
+
+html::-webkit-scrollbar-thumb {
+  /* The track-colored border insets the thumb, leaving a slim pill. */
+  border: 4px solid var(--surface-sunk);
+  border-radius: 999px;
+  background: var(--brand);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-hover);
+}
+
+@supports (-moz-appearance: none) {
+  html {
+    scrollbar-color: var(--brand) var(--surface-sunk);
+  }
+}
+
+::selection {
+  background: var(--champagne);
+  color: var(--cocoa);
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* On the deep sections the focus ring flips to champagne */
+.tone-deep {
+  --focus: var(--champagne);
+}
+
+@layer components {
+  /* Max 1200px content, side padding from --gutter */
+  .container-x {
+    width: 100%;
+    max-width: calc(var(--content-max) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* Signature shape: rounded top, flat bottom */
+  .arch {
+    border-top-left-radius: var(--radius-arch);
+    border-top-right-radius: var(--radius-arch);
+  }
+
+  /* Shown in an image slot that has no photo yet */
+  .placeholder {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 16px;
+    border-radius: inherit;
+    background-color: var(--tone-4);
+    color: var(--ink-on-deep);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  /*
+    Type styles. Bodoni Moda always uses its sturdy small-size cut (opsz 11):
+    the large cut's hairlines vanish on phones.
+  */
+  .display-xl,
+  .display-lg,
+  .heading-1,
+  .heading-2,
+  .heading-3,
+  .quote,
+  .wordmark-name {
+    font-family: var(--font-display-stack);
+    font-optical-sizing: none;
+    font-variation-settings: "opsz" 11;
+    font-weight: 600;
+  }
+
+  /* Hero headline, once per page: 56px on phones up to 96px on desktop */
+  .display-xl {
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+  }
+
+  .display-lg {
+    font-size: clamp(2.5rem, 5.5vw, 4rem);
+    line-height: 0.96;
+    letter-spacing: -0.015em;
+  }
+
+  .heading-1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+
+  .heading-2 {
+    font-size: clamp(1.625rem, 3vw, 2rem);
+    line-height: 1.12;
+  }
+
+  .heading-3 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .quote {
+    font-size: clamp(1.375rem, 2.6vw, 1.75rem);
+    line-height: 1.3;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .wordmark-name {
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.16em;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .body-lg {
+    font-size: 19px;
+    line-height: 31px;
+  }
+
+  .small {
+    font-size: 15px;
+    line-height: 23px;
+  }
+
+  .label {
+    font-size: 15px;
+    line-height: 21px;
+    font-weight: 500;
+  }
+
+  .caption {
+    font-size: 13px;
+    line-height: 19px;
+    font-weight: 500;
+  }
+
+  /* The one authored entrance: the hero copy settles in */
+  .settle-in {
+    animation: settle-in 0.6s ease both;
+  }
+}
+
+/*
+  Scroll reveals: anything marked data-reveal fades up 16px the first time it is seen
+  (RevealOnScroll.tsx adds .is-revealed). Only for visitors who have not asked for
+  reduced motion; everyone else sees the content immediately.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes settle-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settle-in {
+    animation: none;
+  }
+}
