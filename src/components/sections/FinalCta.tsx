@@ -1,5 +1,5 @@
 import { site } from "@/content/site";
-import { ButtonLink } from "@/components/ui/Button";
+import { BookButton } from "@/components/booking/BookButton";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { PhotoBackdrop } from "@/components/ui/PhotoBackdrop";
 import { Section } from "@/components/ui/Section";
@@ -48,9 +48,9 @@ export function FinalCta() {
         </h2>
         <p className="body-lg mt-6 max-w-[30em] text-ink-on-deep-muted">{finalCta.subline}</p>
 
-        <ButtonLink href={booking.url} variant="champagne" className="mt-10">
+        <BookButton variant="champagne" className="mt-10">
           {booking.label}
-        </ButtonLink>
+        </BookButton>
         <p className="small mt-6 text-ink-on-deep-muted">{finalCta.address}</p>
 
         <div

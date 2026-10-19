@@ -1,4 +1,5 @@
 import { site, type Service, type ServiceCategory } from "@/content/site";
+import { BookButton } from "@/components/booking/BookButton";
 import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
 import { MediaFrame } from "@/components/ui/MediaFrame";
@@ -6,7 +7,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 function ServiceRow({ service, comingSoon }: { service: Service; comingSoon: boolean }) {
-  const { services, booking } = site;
+  const { services } = site;
   return (
     <li className="border-b border-line py-7">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
@@ -14,7 +15,9 @@ function ServiceRow({ service, comingSoon }: { service: Service; comingSoon: boo
         {/* A coming-soon service shows no price and no booking link. */}
         <p className="small flex gap-3 text-ink-muted">
           <span>{service.duration}</span>
-          {comingSoon ? null : <span className="font-semibold text-clay">{service.price}</span>}
+          {comingSoon || !service.price ? null : (
+            <span className="font-semibold text-clay">{service.price}</span>
+          )}
         </p>
       </div>
 
@@ -29,10 +32,9 @@ function ServiceRow({ service, comingSoon }: { service: Service; comingSoon: boo
       {comingSoon ? null : (
         <>
           {service.note ? <p className="small mt-3 font-medium">{service.note}</p> : null}
-          <ButtonLink href={booking.url} variant="quiet" className="mt-2">
+          <BookButton service={service} variant="quiet" className="mt-2">
             {services.bookLabel}
-            <span className="sr-only"> {service.name}</span>
-          </ButtonLink>
+          </BookButton>
         </>
       )}
     </li>

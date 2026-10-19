@@ -2,7 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { site } from "@/content/site";
-import { ButtonLink } from "@/components/ui/Button";
+import { BookButton } from "@/components/booking/BookButton";
 import { Logo } from "@/components/ui/Logo";
 
 /** How far the page scrolls before the header turns from clear to glass. */
@@ -89,14 +89,13 @@ export function Navigation() {
           </ul>
         </nav>
 
-        <ButtonLink
-          href={booking.url}
+        <BookButton
           variant={scrolled ? "primary" : "champagne"}
           // Slightly narrower on phones so the larger logo fits beside it.
           className="shrink-0 whitespace-nowrap max-[359px]:px-4 min-[360px]:max-sm:px-5"
         >
           {booking.label}
-        </ButtonLink>
+        </BookButton>
       </div>
     </header>
   );

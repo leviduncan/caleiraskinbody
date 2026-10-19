@@ -1,12 +1,12 @@
 import { site } from "@/content/site";
 import { ArchFrame } from "@/components/ui/ArchFrame";
-import { ButtonLink } from "@/components/ui/Button";
+import { BookButton } from "@/components/booking/BookButton";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function About() {
-  const { about, booking } = site;
+  const { about } = site;
   return (
     <Section id="about" tone="sunk" labelledBy="about-heading">
       <div className="grid items-center gap-12 lg:grid-cols-[5fr_6fr] lg:gap-24">
@@ -28,9 +28,9 @@ export function About() {
             ))}
           </div>
           <p className="caption mt-6 text-ink-muted">{about.credentials}</p>
-          <ButtonLink href={booking.url} variant="secondary" className="mt-8">
+          <BookButton variant="secondary" className="mt-8">
             {about.ctaLabel}
-          </ButtonLink>
+          </BookButton>
         </div>
       </div>
     </Section>

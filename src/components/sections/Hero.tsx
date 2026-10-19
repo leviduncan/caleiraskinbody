@@ -1,11 +1,12 @@
 import { site } from "@/content/site";
+import { BookButton } from "@/components/booking/BookButton";
 import { ButtonLink } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { PhotoBackdrop } from "@/components/ui/PhotoBackdrop";
 import { Section } from "@/components/ui/Section";
 
 export function Hero() {
-  const { hero, booking } = site;
+  const { hero } = site;
   const accentAt = hero.headlineAccent ? hero.headline.indexOf(hero.headlineAccent) : -1;
   const accentEnd = accentAt + (hero.headlineAccent?.length ?? 0);
   return (
@@ -50,9 +51,9 @@ export function Hero() {
         <p className="body-lg mt-8 max-w-[30em] text-ink-on-deep">{hero.subhead}</p>
 
         <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-          <ButtonLink href={booking.url} variant="champagne">
+          <BookButton variant="champagne">
             {hero.primaryCtaLabel}
-          </ButtonLink>
+          </BookButton>
           <ButtonLink href={hero.secondaryCta.href} variant="quiet-on-deep">
             {hero.secondaryCta.label}
           </ButtonLink>

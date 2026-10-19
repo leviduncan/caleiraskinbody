@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Jost } from "next/font/google";
 import { site } from "@/content/site";
+import { CalProvider } from "@/components/booking/CalProvider";
 import "./globals.css";
 
 // The optical-size axis is loaded so globals.css can pin Bodoni to its small-size cut.
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <noscript>
           <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
         </noscript>
+        <CalProvider />
         {children}
       </body>
     </html>

@@ -17,8 +17,8 @@ Every word on the page lives in **`src/content/site.ts`**. Components only read 
 
 - The interfaces at the top of the file describe the shape each section expects.
 - The `site` object at the bottom holds the actual copy.
-- Services are an array (`site.services.items`). A service is either `kind: "bookable"` (has a duration and price and uses the Cal.com link) or `kind: "waitlist"` (no price, no booking link).
-- Every "Book" button reads one field: `site.booking.url`.
+- Services are in `site.services.categories[].services[]`. A service is bookable (`bookable: true`, optional `calSlug`) or coming soon (`bookable: false`, no price, no booking button).
+- Every "Book" button opens the Cal.com popup. Per service, set `bookable` and `calSlug` in `site.ts`; the account name and link rules live in `src/config/cal.ts`.
 - Photos live in `src/assets/` and are imported at the top of `site.ts`. To change one, import the new file and set it on the slot: `image: { src: newPhoto, alt: "...", position: "60% center" }`. `position` controls the crop inside arch frames. A slot with no `image` shows a warm placeholder block.
 
 ## Brand
@@ -54,7 +54,7 @@ npx serve out
 Everything in `[square brackets]` in `src/content/site.ts` still needs real content.
 
 **Links**
-- Cal.com booking URL: `https://cal.com/[username]/[event]`
+- Cal.com account: `caleira` (`CAL_USERNAME` in `src/config/cal.ts`)
 - Google reviews URL: `https://g.page/[google-business-id]`
 - Instagram URL: `https://instagram.com/[handle]`
 - Facebook URL: `https://facebook.com/[page]`
