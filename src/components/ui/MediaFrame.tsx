@@ -36,7 +36,8 @@ export function MediaFrame({
           fill
           sizes={sizes}
           priority={priority}
-          placeholder={typeof image.src === "string" ? "empty" : "blur"}
+          // Below the fold the frame's own color is placeholder enough; a blur only adds page weight.
+          placeholder={priority && typeof image.src !== "string" ? "blur" : "empty"}
           className="object-cover"
           style={{ objectPosition: image.position }}
         />

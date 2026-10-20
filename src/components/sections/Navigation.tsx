@@ -33,9 +33,9 @@ export function Navigation() {
   return (
     // No element carries id="top": a "#top" link then scrolls to the very top of the page.
     <header
-      className={`fixed inset-x-0 top-0 z-40 border-b transition-colors duration-400 ${
+      className={`fixed inset-x-0 top-0 z-40 border-b border-solid transition-colors duration-400 ${
         scrolled
-          ? "border-line bg-surface/80 backdrop-blur-md"
+          ? "border-white bg-surface/80 backdrop-blur-md"
           : "tone-deep border-transparent bg-transparent"
       }`}
     >

@@ -202,7 +202,8 @@ html::-webkit-scrollbar-thumb:hover {
 
   /*
     Type styles. Bodoni Moda always uses its sturdy small-size cut (opsz 11):
-    the large cut's hairlines vanish on phones.
+    the large cut's hairlines vanish on phones. layout.tsx loads only that cut;
+    the settings below keep it pinned if the full axis is ever loaded again.
   */
   .display-xl,
   .display-lg,
