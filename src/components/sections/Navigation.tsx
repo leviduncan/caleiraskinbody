@@ -33,10 +33,10 @@ export function Navigation() {
   return (
     // No element carries id="top": a "#top" link then scrolls to the very top of the page.
     <header
-      className={`fixed inset-x-0 top-0 z-40 border-b transition-colors duration-400 ${
+      className={`fixed inset-x-0 top-0 z-40 border-b border-solid border-white transition-colors duration-400 ${
         scrolled
-          ? "border-line bg-surface/80 backdrop-blur-md"
-          : "tone-deep border-transparent bg-transparent"
+          ? "bg-surface/80 backdrop-blur-md"
+          : "tone-deep bg-transparent"
       }`}
     >
       {/* A soft scrim so the ivory logo and links never sit on bare photo. */}
