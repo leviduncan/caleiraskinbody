@@ -1,4 +1,4 @@
-import Image, { type StaticImageData } from "next/image";
+import Image, { getImageProps, type StaticImageData } from "next/image";
 import { ParallaxLayer, type ParallaxOptions } from "./ParallaxLayer";
 
 interface PhotoBackdropProps {
@@ -33,9 +33,12 @@ export function PhotoBackdrop({
   const photos = [photo, ...alternates];
   const random = photos.length > 1;
 
+  // Off screen at load, a blur placeholder would only add weight to the page.
+  const placeholder = priority ? "blur" : "empty";
+
   // With several photos all are in the page and CSS hides all but one. They stay lazy so the
-  // hidden ones are never downloaded, which rules out preloading; a high fetch priority stands
-  // in for it.
+  // hidden ones are never downloaded; for a priority backdrop the inline script below
+  // preloads the one it picks, so that one still arrives early.
   const image = random ? (
     photos.map((src, index) => (
       <Image
@@ -44,7 +47,7 @@ export function PhotoBackdrop({
         alt=""
         fill
         fetchPriority={priority ? "high" : undefined}
-        placeholder="blur"
+        placeholder={placeholder}
         sizes="100vw"
         className={`object-cover ${position}`}
         data-photo={index}
@@ -56,11 +59,20 @@ export function PhotoBackdrop({
       alt=""
       fill
       priority={priority}
-      placeholder="blur"
+      placeholder={placeholder}
       sizes="100vw"
       className={`object-cover ${position}`}
     />
   );
+
+  // The same srcset each <Image> above renders, so the preload and the image fetch one file.
+  const srcSets = photos.map(
+    (src) => getImageProps({ src, alt: "", fill: true, sizes: "100vw" }).props.srcSet,
+  );
+  const preload = priority
+    ? `var l=document.createElement("link");l.rel="preload";l.as="image";l.imageSizes="100vw";` +
+      `l.fetchPriority="high";l.imageSrcset=${JSON.stringify(srcSets)}[p];document.head.appendChild(l);`
+    : "";
 
   return (
     <div className="absolute inset-0 bg-scrim">
@@ -80,7 +92,9 @@ export function PhotoBackdrop({
           </style>
           <script
             dangerouslySetInnerHTML={{
-              __html: `document.documentElement.setAttribute("data-photo-pick",Math.floor(Math.random()*${photos.length}))`,
+              __html:
+                `(function(){var p=Math.floor(Math.random()*${photos.length});` +
+                `document.documentElement.setAttribute("data-photo-pick",p);${preload}})()`,
             }}
           />
         </>

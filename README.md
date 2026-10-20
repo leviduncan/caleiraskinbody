@@ -31,7 +31,9 @@ Colors, fonts, radii and type styles come from the design system and are defined
 
 ## Static export
 
-`next.config.ts` sets `output: "export"` and `images.unoptimized: true` (the image optimizer needs a server).
+`next.config.ts` sets `output: "export"`. Next's image optimizer needs a server, so instead `src/lib/image-loader.ts` points every photo at resized WebP files, and `npm run build` writes them with `scripts/optimize-images.mjs` after the export. In `npm run dev` the original photos are served.
+
+The page backdrop is a pre-blurred, 160px copy of `light-hero.jpg` (`src/assets/backdrop-blurred.jpg`). After changing the backdrop photo, remake it with `node scripts/blur-backdrop.mjs src/assets/<photo>.jpg src/assets/backdrop-blurred.jpg`.
 
 ```bash
 npm run build

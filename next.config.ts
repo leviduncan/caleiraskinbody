@@ -7,7 +7,12 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   images: {
     // The default image optimizer needs a server, which a static export does not have.
-    unoptimized: true,
+    // Instead this loader names resized WebP files that `npm run build` writes after the export.
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+    // Fewer widths than the defaults, so each photo needs fewer files.
+    deviceSizes: [640, 828, 1080, 1280, 1640, 2048],
+    imageSizes: [256, 384],
   },
   turbopack: {
     rules: {

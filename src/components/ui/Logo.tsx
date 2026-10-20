@@ -36,6 +36,8 @@ export function Logo({ lockup, className = "", priority = false }: LogoProps) {
       src={lockups[lockup]}
       alt=""
       priority={priority}
+      // SVG is sharp at any size, so it skips the resized-WebP loader.
+      unoptimized
       className={`w-auto ${className}`}
     />
   );

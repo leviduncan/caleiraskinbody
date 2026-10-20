@@ -15,6 +15,8 @@ import heroPhoto4 from "@/assets/hero4.jpg";
 import heroPhoto5 from "@/assets/hero5.jpg";
 import facialPhoto from "@/assets/facial.jpg";
 import unwindPhoto from "@/assets/light-hero.jpg";
+// light-hero.jpg, pre-blurred by scripts/blur-backdrop.mjs.
+import backdropPhoto from "@/assets/backdrop-blurred.jpg";
 import massagePhoto from "@/assets/massage.jpg";
 import bookPhoto from "@/assets/pouring-oil.jpg";
 import aboutPhoto from "@/assets/pouring-oil2.jpg";
@@ -290,7 +292,7 @@ const address = {
 const hours = ["Tuesday and Thursday, 6:30 to 8:30 pm", "Saturday, 10 am to 3 pm"];
 
 export const site: SiteContent = {
-  backdrop: unwindPhoto,
+  backdrop: backdropPhoto,
 
   brand: {
     name: "CALÉIRA",
