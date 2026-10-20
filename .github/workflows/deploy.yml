@@ -38,6 +38,17 @@ jobs:
         run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: 1
+          # STAGING ONLY. Remove these two lines at launch (see SWAP.md).
+          SITE_ENV: staging
+          SITE_URL: https://staging.caleiraskinbody.com
+
+      # Safety net: stage_caleira is the live domain's folder (caleiraskinbody.com),
+      # which holds the hand-uploaded coming-soon page. Never deploy there from CI.
+      - name: Guard deploy target
+        run: |
+          if grep -Eq "^[[:space:]]*server-dir:[[:space:]]*/?stage_caleira" .github/workflows/deploy.yml; then
+            echo "Refusing to deploy to stage_caleira (the live domain's folder)"; exit 1
+          fi
 
       # next.config.ts sets output: "export", so the build writes plain files to
       # out/: index.html, 404.html, _next/ (JS, CSS, fonts, images) and the icons.
@@ -52,10 +63,10 @@ jobs:
           protocol: ftps
           # Trailing slashes are required by this action.
           local-dir: ./out/
-          # The folder your domain serves from, relative to the FTP login's home.
-          # Often /public_html/ on cPanel hosts; / if the FTP account is already
-          # rooted at the web folder.
-          server-dir: ${{ secrets.FTP_SERVER_DIR || '/' }}
+          # STAGING: deploys to public_html ONLY, which staging.caleiraskinbody.com
+          # serves. Hardcoded on purpose (the FTP_SERVER_DIR secret is ignored).
+          # stage_caleira is the live domain's folder and holds the coming-soon page.
+          server-dir: /public_html/
           # Keeps a manifest on the server so each deploy uploads only changed
           # files instead of re-sending every image each time.
           state-name: .ftp-deploy-sync-state.json

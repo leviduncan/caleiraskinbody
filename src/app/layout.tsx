@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Jost } from "next/font/google";
 import { site } from "@/content/site";
+import { IS_STAGING, SITE_URL } from "@/config/site-env";
 import { CalProvider } from "@/components/booking/CalProvider";
 import "./globals.css";
 
-// The optical-size axis is loaded so globals.css can pin Bodoni to its small-size cut.
+// No optical-size axis: without it Google serves Bodoni's default opsz 11 cut, the
+// small-size cut globals.css wants, in much smaller files.
 const displayFace = Bodoni_Moda({
   variable: "--font-display-face",
   subsets: ["latin"],
   style: ["normal", "italic"],
-  axes: ["opsz"],
   display: "swap",
 });
 
@@ -20,6 +21,9 @@ const sansFace = Jost({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  // Staging only: the env flag comes from the deploy workflow and is removed at launch.
+  ...(IS_STAGING && { robots: { index: false, follow: false } }),
   title: site.seo.title,
   description: site.seo.description,
 };
