@@ -180,8 +180,10 @@ export interface FinalCtaContent {
     description: string;
     /** Accessible name of the floating assistant button shown on phones. */
     buttonLabel: string;
-    /** Where that button goes: the assistant's phone link ("tel:+1...") once there is one. */
+    /** Where that button goes: the assistant's phone link ("tel:+1..."). */
     href: string;
+    /** The number as shown in the booking band, linked to href. */
+    phoneLabel: string;
     /** id of the empty div the voice widget script mounts into. */
     mountId: string;
   };
@@ -449,9 +451,8 @@ export const site: SiteContent = {
       description:
         "It can share times and tell you about the studio. Kim will talk anything else through at your visit.",
       buttonLabel: "Ask our voice assistant",
-      // TODO: replace with the assistant's phone link, for example "tel:+17275550100".
-      // Until then the button scrolls to the assistant block in the booking band.
-      href: "#assistant",
+      href: "tel:+17272921807",
+      phoneLabel: "(727) 292-1807",
       // The Sonika voice widget script mounts into the div with this id.
       mountId: "sonika-widget",
     },

@@ -17,7 +17,7 @@ Every word on the page lives in **`src/content/site.ts`**. Components only read 
 
 - The interfaces at the top of the file describe the shape each section expects.
 - The `site` object at the bottom holds the actual copy.
-- The founder section is not in `site.ts` either. Its name, years in practice, signature line and portrait slot sit in the `founder` object at the top of `src/components/sections/About.tsx`. Keep its photo slot empty until the model release is signed.
+- The founder section is not in `site.ts` either. Its name, years in practice, signature line and portrait slot sit in the `founder` object at the top of `src/components/sections/About.tsx`. Kim's own photos need no model release; guest photos and quotes still do.
 - The Services menu is not in `site.ts`. It is built from Cal.com plus `services.config.json` (see **Services menu** below).
 - Every "Book" button opens the Cal.com popup. The account name comes from `CAL_USERNAME` at build time; the embed namespace lives in `src/config/cal.ts`.
 - Photos live in `src/assets/` and are imported at the top of `site.ts`. To change one, import the new file and set it on the slot: `image: { src: newPhoto, alt: "...", position: "60% center" }`. `position` controls the crop inside arch frames. A slot with no `image` shows a warm placeholder block.

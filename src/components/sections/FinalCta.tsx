@@ -63,6 +63,12 @@ export function FinalCta() {
           <div className="min-w-0">
             <p className="font-medium">{assistant.title}</p>
             <p className="small mt-1 text-ink-on-deep-muted">{assistant.description}</p>
+            <a
+              href={assistant.href}
+              className="mt-2 inline-flex min-h-11 items-center font-medium text-champagne underline-offset-4 transition-colors duration-400 hover:text-ink-on-deep hover:underline"
+            >
+              Call {assistant.phoneLabel}
+            </a>
             {/* Mount point for the Sonika voice widget script. */}
             <div id={assistant.mountId} className="mt-3 empty:hidden" />
           </div>
