@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { site } from "@/content/site";
+import { isLinkLive } from "@/lib/section-readiness";
 import { BookButton } from "@/components/booking/BookButton";
 import { Logo } from "@/components/ui/Logo";
 
@@ -72,7 +73,7 @@ export function Navigation() {
 
         <nav aria-label="Primary" className="hidden md:block">
           <ul className="flex gap-5">
-            {navigation.links.map((link) => (
+            {navigation.links.filter((link) => isLinkLive(link.href)).map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}

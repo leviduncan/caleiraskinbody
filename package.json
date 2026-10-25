@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "services": "node scripts/fetch-services.mjs && node scripts/build-services.mjs",
     "dev": "next dev",
     "build": "next build && node scripts/optimize-images.mjs",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "predev": "npm run services",
+    "prebuild": "npm run services"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
-    "next": "16.4.0",
+    "next": "16.4.3",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
@@ -20,7 +23,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.4.0",
+    "eslint-config-next": "16.4.3",
     "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "typescript": "^5"

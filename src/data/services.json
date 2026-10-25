@@ -1,0 +1,31 @@
+{
+  "fetchedAt": "2026-10-22T12:04:23.996Z",
+  "apiVersion": "2026-06-12",
+  "username": "caleira",
+  "services": [
+    {
+      "title": "Caleira Skin Discovery Call - Free",
+      "slug": "15min",
+      "durationMinutes": 15,
+      "description": "Explore Caléira's exclusive 90-Day Skin Transformation experience during a complimentary 15-minute virtual consultation. We'll discuss your cosmetic skincare goals, determine program suitability, and explain our personalized approach. This is not a medical consultation.",
+      "bookingUrl": "https://cal.com/caleira/15min",
+      "priceCents": null
+    },
+    {
+      "title": "Caléira Signature Facial",
+      "slug": "60min",
+      "durationMinutes": 60,
+      "description": "Experience a personalized luxury facial designed to cleanse, exfoliate, hydrate, and nourish your skin. Each treatment is customized to your cosmetic skincare needs for a beautifully refreshed, smooth, and radiant appearance.",
+      "bookingUrl": "https://cal.com/caleira/60min",
+      "priceCents": 15000
+    },
+    {
+      "title": "Caléira Brazilian Wax",
+      "slug": "caleira-brazilian-wax",
+      "durationMinutes": 30,
+      "description": "A professional Brazilian waxing experience featuring careful hair removal, attention to comfort, and soothing finishing care. Enjoy smooth, beautifully maintained skin.",
+      "bookingUrl": "https://cal.com/caleira/caleira-brazilian-wax",
+      "priceCents": 7500
+    }
+  ]
+}

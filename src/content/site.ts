@@ -1,5 +1,6 @@
 /**
- * ALL page copy lives in this file. Components only read from it.
+ * ALL page copy lives in this file. Components only read from it. The one exception is
+ * the founder section, whose name, years and signature line sit at the top of About.tsx.
  *
  * To re-skin the site for another business, edit the `site` object at the
  * bottom. The interfaces above it describe the shape each section expects.
@@ -13,16 +14,11 @@ import heroPhoto2 from "@/assets/hero2.jpg";
 import heroPhoto3 from "@/assets/hero3.jpg";
 import heroPhoto4 from "@/assets/hero4.jpg";
 import heroPhoto5 from "@/assets/hero5.jpg";
-import facialPhoto from "@/assets/facial.jpg";
 import unwindPhoto from "@/assets/light-hero.jpg";
 // light-hero.jpg, pre-blurred by scripts/blur-backdrop.mjs.
 import backdropPhoto from "@/assets/backdrop-blurred.jpg";
-import massagePhoto from "@/assets/massage.jpg";
 import bookPhoto from "@/assets/pouring-oil.jpg";
-import aboutPhoto from "@/assets/pouring-oil2.jpg";
-import bodyPhoto from "@/assets/shoulder-exfol.jpg";
 import glowPhoto from "@/assets/shoulder-exfol2.jpg";
-import waxPhoto from "@/assets/waxing-closeup.jpg";
 
 /* ------------------------------------------------------------------ */
 /* Shared shapes                                                       */
@@ -101,43 +97,6 @@ export interface IntroContent {
   pillars: IntroPillar[];
 }
 
-/** One line on the menu. */
-export interface Service {
-  name: string;
-  /** For example "60 min". */
-  duration: string;
-  /** Leave out while the category is coming soon. */
-  price?: string;
-  /** False hides the booking button. Only coming-soon services are false. */
-  bookable: boolean;
-  /**
-   * The Cal.com event slug, for example "60min", opened as caleira/60min.
-   * Leave out until the event type exists: the button then opens the general caleira page.
-   */
-  calSlug?: string;
-  description: string;
-  /** Shown after the "Ideal for" label. */
-  idealFor?: string;
-  /** A small extra line, for example a package saving. Hidden while the category is coming soon. */
-  note?: string;
-}
-
-export interface ServiceCategory {
-  /** Used for the jump link and the anchor: "face" gives #menu-face. */
-  id: string;
-  name: string;
-  intro: string;
-  /**
-   * Not open for booking yet: shows the Coming soon badge, hides every price
-   * and swaps the booking links for the waitlist link.
-   */
-  comingSoon?: boolean;
-  /** Small print under the list. */
-  note?: string;
-  image: ImageSlot;
-  services: Service[];
-}
-
 export interface ServicesContent {
   heading: string;
   intro: string;
@@ -148,7 +107,8 @@ export interface ServicesContent {
   idealForLabel: string;
   comingSoonBadge: string;
   waitlist: LinkItem;
-  categories: ServiceCategory[];
+  /** Shown when no category has anything to list. */
+  emptyMessage: string;
 }
 
 export interface ExperienceStep {
@@ -163,23 +123,18 @@ export interface ExperienceContent {
   steps: ExperienceStep[];
 }
 
-export interface AboutContent {
-  eyebrow: string;
-  heading: string;
-  /** One entry per paragraph. */
-  bio: string[];
-  credentials: string;
-  ctaLabel: string;
-  portrait: ImageSlot;
-}
-
 export interface FreebieContent {
   heading: string;
   description: string;
   firstNameLabel: string;
   emailLabel: string;
   submitLabel: string;
+  /** How the email is used and how to unsubscribe. The form never shows without it. */
   consent: string;
+  /** The n8n webhook URL (https) the form posts to. Empty keeps the whole section hidden. */
+  endpoint: string;
+  successMessage: string;
+  errorMessage: string;
 }
 
 export interface TestimonialContent {
@@ -187,7 +142,15 @@ export interface TestimonialContent {
   label: string;
   /** A real guest's words, unedited, used with written permission. */
   quote: string;
+  /** First name, last initial and city. Empty hides the section. */
   attribution: string;
+  /** Set true only once the signed model release is on file (F.S. 540.08). */
+  modelReleaseSigned: boolean;
+  /**
+   * How this review was gathered. FTC 2024 rule: ask every guest the same way, and never
+   * reward a positive review. A record for the owner; not shown and not checked.
+   */
+  collectionNote: string;
   /** Must sit directly under any quote about how skin or body looks. */
   disclaimer: string;
   moreCta: LinkItem;
@@ -270,7 +233,6 @@ export interface SiteContent {
   intro: IntroContent;
   services: ServicesContent;
   experience: ExperienceContent;
-  about: AboutContent;
   freebie: FreebieContent;
   testimonial: TestimonialContent;
   faq: FaqContent;
@@ -313,7 +275,7 @@ export const site: SiteContent = {
   navigation: {
     links: [
       { label: "Menu", href: "#services" },
-      { label: "About", href: "#about" },
+      { label: "Meet Kim", href: "#about" },
       { label: "Visit", href: "#visit" },
       { label: "FAQ", href: "#faq" },
     ],
@@ -363,128 +325,8 @@ export const site: SiteContent = {
     comingSoonBadge: "Coming soon",
     // TODO: point this at the waitlist form or page once it exists.
     waitlist: { label: "Join the waitlist", href: "#waitlist-todo" },
-    // Kim's launch menu. Descriptions follow her wording, adjusted to the brand voice
-    // and claims rules: guests not clients, session or ritual not treatment, appearance not results.
-    categories: [
-      {
-        id: "face",
-        name: "Face",
-        intro: "Unhurried facials, shaped around your skin on the day.",
-        image: {
-          label: "[Facial photo]",
-          image: {
-            src: facialPhoto,
-            alt: "A soft brush sweeping a glossy mask across a guest's cheek, eyes closed.",
-          },
-        },
-        services: [
-          {
-            name: "CALÉIRA Signature Facial",
-            duration: "60 min",
-            price: "$150",
-            bookable: true,
-            calSlug: "60min",
-            description:
-              "A personalized European-inspired facial that cleanses, exfoliates, hydrates, and nourishes. Includes a customized skin assessment, gentle exfoliation, a relaxing facial massage, a targeted mask, and finishing skincare.",
-            idealFor: "Guests who want fresh, healthy-looking skin and a steady skincare routine.",
-          },
-          {
-            // Compliance: a facial is never described as massage (F.S. 477.0265).
-            name: "CALÉIRA Facial Sculpt",
-            duration: "60 min",
-            price: "$175",
-            bookable: true,
-            calSlug: "caleira-facial-sculpt",
-            description:
-              "A sculpting facial with targeted massage techniques and deep hydration, designed to leave you feeling relaxed with a refreshed, rested look.",
-            idealFor: "Special events and a little extra facial relaxation.",
-          },
-        ],
-      },
-      {
-        id: "wax",
-        name: "Wax",
-        intro: "Quick, careful hair removal, with your comfort first.",
-        image: {
-          label: "[Waxing photo]",
-          image: {
-            src: waxPhoto,
-            alt: "Gloved hands smoothing warm golden wax along a guest's lower leg with a wooden spatula.",
-          },
-        },
-        services: [
-          {
-            name: "CALÉIRA Brazilian Wax",
-            duration: "30 min",
-            price: "$75",
-            bookable: true,
-            calSlug: "caleira-brazilian-wax",
-            description:
-              "A professional Brazilian wax that emphasizes precision, hygiene, comfort, and discretion, leaving skin feeling smooth and well cared for.",
-            idealFor: "Guests who want consistent grooming and lasting smoothness.",
-          },
-          {
-            name: "CALÉIRA Executive Grooming",
-            duration: "30 min",
-            price: "$65",
-            bookable: true,
-            description:
-              "A quick, polished grooming visit with professional eyebrow shaping and your choice of upper-lip or chin waxing, finished with soothing post-wax care.",
-            idealFor: "Busy professionals who want a polished look without a long appointment.",
-          },
-        ],
-      },
-      {
-        // Compliance: no price and no booking link until the Florida MM license is issued,
-        // and the MA and MM numbers are in the footer. Remove this line to open the category.
-        comingSoon: true,
-        id: "massage",
-        name: "Massage",
-        intro: "Slow hands and full attention, from first touch to last.",
-        image: {
-          label: "[Massage photo]",
-          image: {
-            src: massagePhoto,
-            alt: "A provider cradling a guest's neck and shoulder with both hands in a candlelit room.",
-            position: "35% center",
-          },
-        },
-        services: [
-          {
-            name: "CALÉIRA Signature Massage",
-            duration: "90 min",
-            bookable: false,
-            description:
-              "A 90-minute full-body massage tailored to your pressure and preferences. Launching soon.",
-          },
-        ],
-      },
-      {
-        // Compliance: body services stay coming soon, with no price and no booking link,
-        // until the Florida MM license is issued. Remove this line to open the category.
-        comingSoon: true,
-        id: "body",
-        name: "Body",
-        intro: "Hands-on sculpting sessions for the body, calm and unhurried.",
-        note: "Body contouring is cosmetic. Individual experiences vary.",
-        image: {
-          label: "[Body session photo]",
-          image: {
-            src: bodyPhoto,
-            alt: "Two hands smoothing cream across a guest's shoulder beside a folded white towel.",
-          },
-        },
-        services: [
-          {
-            name: "CALÉIRA Sculpt 360",
-            duration: "75 min",
-            bookable: false,
-            description:
-              "A personalized body-care experience that pairs studio-grade technology with calm, unhurried care. Launching soon.",
-          },
-        ],
-      },
-    ],
+    emptyMessage: "The menu is being updated. Please check back soon.",
+    // The categories and services come from Cal.com plus services.config.json (see the README).
   },
 
   experience: {
@@ -532,46 +374,33 @@ export const site: SiteContent = {
     ],
   },
 
-  about: {
-    eyebrow: "Meet your provider",
-    heading: "Hi, I'm Kim.",
-    bio: [
-      "CALÉIRA is said kah-LAY-rah. It is a private studio where every skin tone is the expected guest, and every hour is unhurried.",
-      "[Kim's bio, in her own words: two or three sentences about her background, her approach, and what guests can expect when they visit.]",
-    ],
-    credentials: "[Licensed [type], license # [number]]",
-    ctaLabel: "Book with Kim",
-    portrait: {
-      label: "[Portrait of Kim]",
-      // Stand-in until the first photo shoot. Replace with a real portrait of Kim.
-      image: {
-        src: aboutPhoto,
-        alt: "Golden oil streaming from a white pitcher into a cupped hand.",
-        position: "55% center",
-      },
-    },
-  },
-
   freebie: {
-    heading: "[Freebie title]",
-    description: "[One line describing the free guide or offer.]",
+    // The whole section stays hidden until heading, description, consent and endpoint are all
+    // filled in (see src/lib/section-readiness.ts).
+    heading: "",
+    description: "",
     firstNameLabel: "First name",
     emailLabel: "Email",
     submitLabel: "Send it to me",
-    consent:
-      "[Consent line: how the email address will be used and how to unsubscribe.]",
+    consent: "",
+    endpoint: "",
+    successMessage: "Thank you. Check your inbox.",
+    errorMessage: "Something went wrong. Please try again in a moment.",
   },
 
   // Compliance: only real, unedited quotes from guests who gave written permission.
   testimonial: {
     label: "What guests say",
-    quote: "[Guest quote goes here, word for word, with written permission.]",
-    attribution: "[First name, last initial] · [City]",
+    // The whole section stays hidden until quote, attribution and modelReleaseSigned are set.
+    quote: "",
+    attribution: "",
+    modelReleaseSigned: false,
+    collectionNote: "",
     disclaimer: "Individual experiences vary.",
-    // TODO: replace with the real Google Business Profile reviews link.
+    // Empty href hides just the link. Use the Google Business Profile reviews link.
     moreCta: {
       label: "Read more on Google",
-      href: "https://g.page/[google-business-id]",
+      href: "",
     },
   },
 
@@ -602,7 +431,8 @@ export const site: SiteContent = {
       },
       {
         question: "Where are you located and where do I park?",
-        answer: `You will find us at ${address.street}, ${address.cityLine}. [Add parking directions.]`,
+        // TODO: add parking directions to this answer.
+        answer: `You will find us at ${address.street}, ${address.cityLine}.`,
       },
     ],
   },

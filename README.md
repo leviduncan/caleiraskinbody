@@ -17,8 +17,9 @@ Every word on the page lives in **`src/content/site.ts`**. Components only read 
 
 - The interfaces at the top of the file describe the shape each section expects.
 - The `site` object at the bottom holds the actual copy.
-- Services are in `site.services.categories[].services[]`. A service is bookable (`bookable: true`, optional `calSlug`) or coming soon (`bookable: false`, no price, no booking button).
-- Every "Book" button opens the Cal.com popup. Per service, set `bookable` and `calSlug` in `site.ts`; the account name and link rules live in `src/config/cal.ts`.
+- The founder section is not in `site.ts` either. Its name, years in practice, signature line and portrait slot sit in the `founder` object at the top of `src/components/sections/About.tsx`. Keep its photo slot empty until the model release is signed.
+- The Services menu is not in `site.ts`. It is built from Cal.com plus `services.config.json` (see **Services menu** below).
+- Every "Book" button opens the Cal.com popup. The account name comes from `CAL_USERNAME` at build time; the embed namespace lives in `src/config/cal.ts`.
 - Photos live in `src/assets/` and are imported at the top of `site.ts`. To change one, import the new file and set it on the slot: `image: { src: newPhoto, alt: "...", position: "60% center" }`. `position` controls the crop inside arch frames. A slot with no `image` shows a warm placeholder block.
 
 ## Brand
@@ -28,6 +29,30 @@ Colors, fonts, radii and type styles come from the design system and are defined
 - Display type is Bodoni Moda, pinned to its small-size cut. Text is Jost. Both load in `src/app/layout.tsx`.
 - Logos come from the kit in `src/assets/caleira-logos/` (see its README for the rules). The header uses the horizontal lockup and the footer the stacked one, both from the light set, through `src/components/ui/Logo.tsx`. The favicons in `src/app/` are the kit's light icon.
 - Only the light (Coquina) theme is built. The Evening theme in the design system is not.
+
+## Services menu (Cal.com)
+
+The menu is built at build time from two sources, then merged:
+
+1. **Cal.com** supplies name, duration, booking link and price for every public event type. `scripts/fetch-services.mjs` calls `GET https://api.cal.com/v2/event-types` and writes `src/data/services.json` (committed, so it is the "last good" copy).
+2. **`services.config.json`** supplies what Cal.com cannot: category order and intro, the category photo and its alt text, approved description copy, "Ideal for" line, optional price text, optional tag, and `status`. The order of slugs in each category is the order on the page.
+
+`scripts/build-services.mjs` merges them into `src/data/services.merged.json` and `src/data/service-images.ts` (both generated, committed). `npm run dev` and `npm run build` run both steps first. Run them alone with `npm run services`.
+
+**Setup:** copy `.env.example` to `.env.local` and set `CAL_API_KEY` (Cal.com, Settings, Developer, API keys) and `CAL_USERNAME` (the name in `cal.com/<username>`, not an email). The key is read only by the build scripts and never reaches the browser. In CI, add `CAL_API_KEY` and `CAL_USERNAME` to the build step's environment, otherwise CI uses the committed `services.json`.
+
+**Add a service:** create a public event type in Cal.com, title it `Name - $150` (the price suffix is read as the price, since Cal.com's own price field is 0 without Stripe), then add its slug to a category's `services` list and an entry under `services` in `services.config.json`. Write the description there. Run `npm run services` and check the warnings.
+
+**Refresh:** `npm run services`, then commit `src/data/`.
+
+**What never renders, by design**
+- Hidden Cal.com event types, and event types not listed in the config. The build prints which ones were left off.
+- A Cal.com description that contains outcome, medical or dash wording, unless the config supplies approved copy. The build warns when it holds one back.
+- Any price, link or Book button on a `coming-soon` service or inside a `comingSoon` category. These entries are local only and ignore Cal.com. `guard.neverBookable` stops the build if a massage-like service is not coming soon.
+- `dormant` in `services.config.json` parks services and categories that should not render (massage, body, facial sculpt, executive grooming). Move an entry back into `categories` and `services` to restore it. Each service carries its own `image`; cards alternate photo left and right by position down the page.
+- If the API fails while `CAL_API_KEY` is set, the fetch prints a loud "SERVICES MAY BE STALE" banner (with the age of the cached file) and exits 1, so `dev` and `build` stop. With no key set (CI, a fresh clone) it warns and keeps the last good `services.json`.
+
+**Reuse for another client:** new Cal.com username and key, then rewrite `services.config.json` (categories, services, photos under `src/assets/`, `guard.neverBookable`) and the copy in `site.ts`.
 
 ## Static export
 
@@ -56,7 +81,7 @@ npx serve out
 Everything in `[square brackets]` in `src/content/site.ts` still needs real content.
 
 **Links**
-- Cal.com account: `caleira` (`CAL_USERNAME` in `src/config/cal.ts`)
+- Cal.com account: `caleira` (set `CAL_USERNAME` in `.env.local`)
 - Google reviews URL: `https://g.page/[google-business-id]`
 - Instagram URL: `https://instagram.com/[handle]`
 - Facebook URL: `https://facebook.com/[page]`

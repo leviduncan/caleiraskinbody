@@ -1,0 +1,138 @@
+{
+  "_readme": "Local overrides for what Cal.com cannot supply. Services are keyed by Cal.com event slug. Category order and the order of slugs inside a category set the page order. See the README section 'Services menu'.",
+  "guard": {
+    "_note": "Any service whose slug or name contains one of these words must be coming-soon, or the build stops.",
+    "neverBookable": [
+      "massage",
+      "sculpt-360",
+      "sculpt 360"
+    ]
+  },
+  "categories": [
+    {
+      "id": "consultation",
+      "name": "Consultation",
+      "intro": "A short, free conversation before you book anything else.",
+      "services": [
+        "15min"
+      ]
+    },
+    {
+      "id": "face",
+      "name": "Face",
+      "intro": "Unhurried facials, shaped around your skin on the day.",
+      "services": [
+        "60min"
+      ]
+    },
+    {
+      "id": "wax",
+      "name": "Wax",
+      "intro": "Quick, careful hair removal, with your comfort first.",
+      "services": [
+        "caleira-brazilian-wax"
+      ]
+    }
+  ],
+  "services": {
+    "15min": {
+      "name": "Skin Discovery Call",
+      "description": "A complimentary 15-minute virtual chat about your skin goals and which CALÉIRA service fits you best. This is not a medical consultation.",
+      "priceText": "Free",
+      "image": {
+        "path": "src/assets/Kim02.jpg",
+        "alt": "Kim, the founder of CALÉIRA, smiling in a white CALÉIRA top against a soft cream wall.",
+        "position": "50% 20%"
+      }
+    },
+    "60min": {
+      "name": "CALÉIRA Signature Facial",
+      "description": "A personalized European-inspired facial that cleanses, exfoliates, hydrates, and nourishes. Includes a customized skin assessment, gentle exfoliation, a relaxing facial massage, a targeted mask, and finishing skincare.",
+      "idealFor": "Guests who want fresh, healthy-looking skin and a steady skincare routine.",
+      "image": {
+        "path": "src/assets/facial.jpg",
+        "alt": "A soft brush sweeping a glossy mask across a guest's cheek, eyes closed."
+      }
+    },
+    "caleira-brazilian-wax": {
+      "name": "CALÉIRA Brazilian Wax",
+      "description": "A professional Brazilian wax that emphasizes precision, hygiene, comfort, and discretion, leaving skin feeling smooth and well cared for.",
+      "idealFor": "Guests who want consistent grooming and lasting smoothness.",
+      "image": {
+        "path": "src/assets/waxing-closeup.jpg",
+        "alt": "Gloved hands smoothing warm golden wax along a guest's lower leg with a wooden spatula."
+      }
+    }
+  },
+  "dormant": {
+    "_note": "Not rendered. Move an entry back into categories and services to restore it. Dormant slugs are ignored by the build, including the unplaced warning.",
+    "categories": [
+      {
+        "id": "face-dormant-services",
+        "_note": "Services removed from category \"face\"",
+        "services": [
+          "caleira-facial-sculpt"
+        ]
+      },
+      {
+        "id": "wax-dormant-services",
+        "_note": "Services removed from category \"wax\"",
+        "services": [
+          "caleira-executive-grooming"
+        ]
+      },
+      {
+        "id": "massage",
+        "name": "Massage",
+        "intro": "Slow hands and full attention, from first touch to last.",
+        "comingSoon": true,
+        "image": {
+          "path": "src/assets/massage.jpg",
+          "alt": "A provider cradling a guest's neck and shoulder with both hands in a candlelit room.",
+          "position": "35% center"
+        },
+        "services": [
+          "signature-massage"
+        ]
+      },
+      {
+        "id": "body",
+        "name": "Body",
+        "intro": "Hands-on sculpting sessions for the body, calm and unhurried.",
+        "comingSoon": true,
+        "note": "Body contouring is cosmetic. Individual experiences vary.",
+        "image": {
+          "path": "src/assets/shoulder-exfol.jpg",
+          "alt": "Two hands smoothing cream across a guest's shoulder beside a folded white towel."
+        },
+        "services": [
+          "sculpt-360"
+        ]
+      }
+    ],
+    "services": {
+      "caleira-facial-sculpt": {
+        "name": "CALÉIRA Facial Sculpt",
+        "description": "A sculpting facial with targeted massage techniques and deep hydration, designed to leave you feeling relaxed with a refreshed, rested look.",
+        "idealFor": "Special events and a little extra facial relaxation."
+      },
+      "caleira-executive-grooming": {
+        "name": "CALÉIRA Executive Grooming",
+        "description": "A quick, polished grooming visit with professional eyebrow shaping and your choice of upper-lip or chin waxing, finished with soothing post-wax care.",
+        "idealFor": "Busy professionals who want a polished look without a long appointment."
+      },
+      "signature-massage": {
+        "status": "coming-soon",
+        "name": "CALÉIRA Signature Massage",
+        "durationText": "90 min",
+        "description": "A 90-minute full-body massage tailored to your pressure and preferences. Launching soon."
+      },
+      "sculpt-360": {
+        "status": "coming-soon",
+        "name": "CALÉIRA Sculpt 360",
+        "durationText": "90 min",
+        "description": "A personalized body-care experience that pairs studio-grade technology with calm, unhurried care. Launching soon."
+      }
+    }
+  }
+}

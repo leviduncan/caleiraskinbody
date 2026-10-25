@@ -39,8 +39,8 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: 1
           # STAGING ONLY. Remove these two lines at launch (see SWAP.md).
-          SITE_ENV: staging
-          SITE_URL: https://staging.caleiraskinbody.com
+          # SITE_ENV: staging
+          # SITE_URL: https://caleiraskinbody.com
 
       # Safety net: stage_caleira is the live domain's folder (caleiraskinbody.com),
       # which holds the hand-uploaded coming-soon page. Never deploy there from CI.

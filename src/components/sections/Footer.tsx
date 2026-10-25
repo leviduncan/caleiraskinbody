@@ -1,5 +1,6 @@
 import { site } from "@/content/site";
 import { Logo } from "@/components/ui/Logo";
+import { isLinkLive } from "@/lib/section-readiness";
 
 const footerLink =
   "inline-flex min-h-11 min-w-11 items-center transition-colors duration-400 hover:text-ink-on-deep";
@@ -19,7 +20,14 @@ export function Footer() {
             <p className="small mt-1 text-ink-on-deep-muted">{brand.tagline}</p>
           </div>
 
-          {footer.columns.map((column) => (
+          {footer.columns
+            .map((column) => ({
+              ...column,
+              lines: column.lines.filter((line) => !line.href || isLinkLive(line.href)),
+            }))
+            // A column whose links are all placeholders, such as Follow, is left out.
+            .filter((column) => column.lines.length > 0)
+            .map((column) => (
             <div key={column.title}>
               <h2 className="eyebrow text-champagne">{column.title}</h2>
               <ul className="small mt-3 text-ink-on-deep-muted">
@@ -55,7 +63,7 @@ export function Footer() {
           <div className="mt-6 flex flex-col gap-x-8 gap-y-1 md:flex-row md:flex-wrap md:items-center md:justify-between md:pr-20">
             <p>{footer.copyright}</p>
             <ul className="flex flex-wrap items-center gap-x-6">
-              {footer.legalLinks.map((link) => (
+              {footer.legalLinks.filter((link) => isLinkLive(link.href)).map((link) => (
                 <li key={link.label}>
                   <a href={link.href} className={footerLink}>
                     {link.label}

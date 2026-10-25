@@ -11,6 +11,8 @@ export interface MediaFrameProps {
   arch?: boolean;
   sizes?: string;
   priority?: boolean;
+  /** Print the slot's label on the placeholder block. It is always the accessible name. */
+  showPlaceholderLabel?: boolean;
   className?: string;
 }
 
@@ -21,6 +23,7 @@ export function MediaFrame({
   arch = false,
   sizes = "(min-width: 1024px) 480px, 100vw",
   priority = false,
+  showPlaceholderLabel = true,
   className = "",
 }: MediaFrameProps) {
   const { image } = slot;
@@ -42,7 +45,7 @@ export function MediaFrame({
           style={{ objectPosition: image.position }}
         />
       ) : (
-        <ImagePlaceholder label={slot.label} />
+        <ImagePlaceholder label={slot.label} showLabel={showPlaceholderLabel} />
       )}
       {arch ? (
         <span

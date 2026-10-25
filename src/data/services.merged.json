@@ -1,0 +1,86 @@
+{
+  "username": "caleira",
+  "categories": [
+    {
+      "id": "consultation",
+      "name": "Consultation",
+      "intro": "A short, free conversation before you book anything else.",
+      "comingSoon": false,
+      "note": null,
+      "services": [
+        {
+          "slug": "15min",
+          "name": "Skin Discovery Call",
+          "durationText": "15 min",
+          "description": "A complimentary 15-minute virtual chat about your skin goals and which CALÉIRA service fits you best. This is not a medical consultation.",
+          "idealFor": null,
+          "note": null,
+          "priceText": "Free",
+          "tag": null,
+          "status": "available",
+          "bookable": true,
+          "calLink": "caleira/15min",
+          "image": {
+            "path": "src/assets/Kim02.jpg",
+            "alt": "Kim, the founder of CALÉIRA, smiling in a white CALÉIRA top against a soft cream wall.",
+            "position": "50% 20%"
+          }
+        }
+      ]
+    },
+    {
+      "id": "face",
+      "name": "Face",
+      "intro": "Unhurried facials, shaped around your skin on the day.",
+      "comingSoon": false,
+      "note": null,
+      "services": [
+        {
+          "slug": "60min",
+          "name": "CALÉIRA Signature Facial",
+          "durationText": "60 min",
+          "description": "A personalized European-inspired facial that cleanses, exfoliates, hydrates, and nourishes. Includes a customized skin assessment, gentle exfoliation, a relaxing facial massage, a targeted mask, and finishing skincare.",
+          "idealFor": "Guests who want fresh, healthy-looking skin and a steady skincare routine.",
+          "note": null,
+          "priceText": "$150",
+          "tag": null,
+          "status": "available",
+          "bookable": true,
+          "calLink": "caleira/60min",
+          "image": {
+            "path": "src/assets/facial.jpg",
+            "alt": "A soft brush sweeping a glossy mask across a guest's cheek, eyes closed.",
+            "position": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "wax",
+      "name": "Wax",
+      "intro": "Quick, careful hair removal, with your comfort first.",
+      "comingSoon": false,
+      "note": null,
+      "services": [
+        {
+          "slug": "caleira-brazilian-wax",
+          "name": "CALÉIRA Brazilian Wax",
+          "durationText": "30 min",
+          "description": "A professional Brazilian wax that emphasizes precision, hygiene, comfort, and discretion, leaving skin feeling smooth and well cared for.",
+          "idealFor": "Guests who want consistent grooming and lasting smoothness.",
+          "note": null,
+          "priceText": "$75",
+          "tag": null,
+          "status": "available",
+          "bookable": true,
+          "calLink": "caleira/caleira-brazilian-wax",
+          "image": {
+            "path": "src/assets/waxing-closeup.jpg",
+            "alt": "Gloved hands smoothing warm golden wax along a guest's lower leg with a wooden spatula.",
+            "position": null
+          }
+        }
+      ]
+    }
+  ]
+}
