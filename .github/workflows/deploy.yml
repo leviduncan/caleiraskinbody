@@ -42,14 +42,6 @@ jobs:
           # SITE_ENV: staging
           # SITE_URL: https://caleiraskinbody.com
 
-      # Safety net: stage_caleira is the live domain's folder (caleiraskinbody.com),
-      # which holds the hand-uploaded coming-soon page. Never deploy there from CI.
-      - name: Guard deploy target
-        run: |
-          if grep -Eq "^[[:space:]]*server-dir:[[:space:]]*/?stage_caleira" .github/workflows/deploy.yml; then
-            echo "Refusing to deploy to stage_caleira (the live domain's folder)"; exit 1
-          fi
-
       # next.config.ts sets output: "export", so the build writes plain files to
       # out/: index.html, 404.html, _next/ (JS, CSS, fonts, images) and the icons.
       - name: Deploy to FTP
@@ -63,10 +55,11 @@ jobs:
           protocol: ftps
           # Trailing slashes are required by this action.
           local-dir: ./out/
-          # STAGING: deploys to public_html ONLY, which staging.caleiraskinbody.com
-          # serves. Hardcoded on purpose (the FTP_SERVER_DIR secret is ignored).
-          # stage_caleira is the live domain's folder and holds the coming-soon page.
-          server-dir: /public_html/
+          # The FTP account opens in public_html/caleira, which is caleiraskinbody.com's
+          # document root, so "./" deploys straight to the live site. A path here is
+          # relative to that folder: "/public_html/" would land in caleira/public_html/.
+          # Hardcoded on purpose (the FTP_SERVER_DIR secret is ignored).
+          server-dir: ./
           # Keeps a manifest on the server so each deploy uploads only changed
           # files instead of re-sending every image each time. If the site files are
           # deleted on the server but this manifest is not, deploys upload nothing:

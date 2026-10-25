@@ -1,5 +1,7 @@
 # Staging to launch swap
 
+**Done 2026-10-25.** The staging subdomain is deleted and caleiraskinbody.com serves `public_html/caleira`, the folder the FTP account opens in. CI deploys there with `server-dir: ./`. The rest of this file records how the launch was planned.
+
 Docroot layout (swapped in cPanel):
 
 | Domain | Docroot | Holds |
