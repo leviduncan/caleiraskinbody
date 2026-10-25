@@ -68,5 +68,7 @@ jobs:
           # stage_caleira is the live domain's folder and holds the coming-soon page.
           server-dir: /public_html/
           # Keeps a manifest on the server so each deploy uploads only changed
-          # files instead of re-sending every image each time.
-          state-name: .ftp-deploy-sync-state.json
+          # files instead of re-sending every image each time. If the site files are
+          # deleted on the server but this manifest is not, deploys upload nothing:
+          # rename it (bump the number) to force one full upload.
+          state-name: .ftp-deploy-sync-state-2.json
