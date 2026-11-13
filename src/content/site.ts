@@ -256,7 +256,8 @@ const address = {
 /** Florida massage licenses, shown in the footer and the About section (F.S. 480.0465). */
 export const licenses = { therapist: "MA58353", establishment: "MM48209" };
 
-const hours = ["Tuesday and Thursday, 6:30 to 8:30 pm", "Saturday, 10 am to 3 pm"];
+// \u00a0 is a non-breaking space, so "am" and "pm" never wrap away from their time.
+const hours = ["Tuesday and Thursday, 6:30 to 8:30\u00a0pm", "Saturday, 10\u00a0am to 3\u00a0pm"];
 
 export const site: SiteContent = {
   backdrop: backdropPhoto,
