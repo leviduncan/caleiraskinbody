@@ -55,7 +55,7 @@ export function Footer() {
         </div>
 
         <div className="caption mt-16 border-t border-champagne/30 pt-6 text-ink-on-deep-muted">
-          {/* TODO: Florida F.S. 480.0465: MA and MM license numbers, address, and DOH phone required on massage ads. Awaiting from Kim. */}
+          {/* TODO: Florida F.S. 480.0465: DOH-registered phone also required on massage ads. Awaiting from Kim. */}
           <p>{footer.compliance}</p>
           {footer.licenses ? <p className="mt-2">{footer.licenses}</p> : null}
 

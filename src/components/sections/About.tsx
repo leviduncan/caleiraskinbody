@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import kimPhoto from "@/assets/Kim01.jpg";
-import { site, type ImageSlot } from "@/content/site";
+import { licenses, site, type ImageSlot } from "@/content/site";
 import { ArchFrame } from "@/components/ui/ArchFrame";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
@@ -62,11 +62,15 @@ export function About() {
           </div>
 
           {/*
-            TODO(compliance): the bio mentions massage, so Florida F.S. 480.0465 applies here.
-            Once issued, add Kim's MA license number, the MM establishment license number and
-            the DOH-registered phone number. Until then, no license claim of any kind
-            ("licensed", "LMT", "licensed esthetician") anywhere in this section.
+            The bio mentions massage, so Florida F.S. 480.0465 requires the license numbers here.
+            TODO(compliance): the DOH-registered phone number is still awaited from Kim.
           */}
+          <p className="small mt-6 text-brand">
+            Florida Licensed Massage Therapist {licenses.therapist}
+            <span aria-hidden="true"> · </span>
+            <span className="sr-only">, </span>
+            Massage Establishment {licenses.establishment}
+          </p>
 
           <div aria-hidden="true" className="mt-10 h-px w-16 bg-champagne" />
           <p className="label mt-6 tracking-[0.08em] text-brand">

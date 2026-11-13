@@ -216,7 +216,7 @@ export interface FooterContent {
   columns: FooterColumn[];
   /** The non-medical statement. Always shown. */
   compliance: string;
-  /** Florida MA and MM license numbers. Fill in the day massage launches. */
+  /** Florida MA and MM license numbers. */
   licenses: string;
   copyright: string;
   legalLinks: LinkItem[];
@@ -252,6 +252,9 @@ const address = {
   cityLine: "Largo, Florida 33771",
   mapsQuery: "104%20Seacrest%20Dr%20Suite%201%2C%20Largo%2C%20FL%2033771",
 };
+
+/** Florida massage licenses, shown in the footer and the About section (F.S. 480.0465). */
+export const licenses = { therapist: "MA58353", establishment: "MM48209" };
 
 const hours = ["Tuesday and Thursday, 6:30 to 8:30 pm", "Saturday, 10 am to 3 pm"];
 
@@ -511,8 +514,8 @@ export const site: SiteContent = {
     ],
     compliance:
       "CALÉIRA is a non-medical wellness studio. Services are not intended to diagnose, treat, or cure any condition.",
-    // Florida law requires the MA and MM numbers here the day massage goes live.
-    licenses: "",
+    // Florida F.S. 480.0465 requires the MA and MM numbers on massage advertising.
+    licenses: `Massage Therapist: ${licenses.therapist} · Massage Establishment: ${licenses.establishment}`,
     copyright: "© 2026 CALÉIRA Skin & Body. All rights reserved.",
     legalLinks: [
       // TODO: replace with real Privacy and Terms pages.

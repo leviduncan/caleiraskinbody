@@ -91,8 +91,6 @@ Everything in `[square brackets]` in `src/content/site.ts` still needs real cont
 
 **Business details**
 - `[Phone number]`, `[Email address]` (Visit section). The phone must match the one registered with the Florida Department of Health.
-- `[Licensed [type], license # [number]]` (Kim's credentials)
-- `footer.licenses` is empty. Florida law requires the MA and MM license numbers there the day massage goes live.
 
 **Section copy**
 - The service menu: names, durations and `[Price]` are placeholders until Kim confirms the final menu.
