@@ -52,6 +52,78 @@
             "alt": "A soft brush sweeping a glossy mask across a guest's cheek, eyes closed.",
             "position": null
           }
+        },
+        {
+          "slug": "caleira-facial-sculpt",
+          "name": "CALÉIRA Facial Sculpt",
+          "durationText": "60 min",
+          "description": "A sculpting facial with targeted massage techniques and deep hydration, designed to leave you feeling relaxed with a refreshed, rested look.",
+          "idealFor": "Special events and a little extra facial relaxation.",
+          "note": null,
+          "priceText": "$175",
+          "tag": null,
+          "status": "available",
+          "bookable": true,
+          "calLink": "caleira/caleira-facial-sculpt",
+          "image": {
+            "path": "src/assets/lympho.jpg",
+            "alt": "A provider resting both hands along a guest's collarbone in a candlelit treatment room.",
+            "position": "50% 40%"
+          }
+        }
+      ]
+    },
+    {
+      "id": "massage",
+      "name": "Massage",
+      "intro": "Slow hands and full attention, from first touch to last.",
+      "comingSoon": false,
+      "note": null,
+      "services": [
+        {
+          "slug": "caleira-signature-massage",
+          "name": "CALÉIRA Signature Massage",
+          "durationText": "90 min",
+          "description": "A 90-minute full-body massage with pressure tailored to you, flowing movements and attentive care. An unhurried escape designed for deep relaxation.",
+          "idealFor": "Guests who want a long, unhurried hour and a half to unwind.",
+          "note": null,
+          "priceText": "$225",
+          "tag": null,
+          "status": "available",
+          "bookable": true,
+          "calLink": "caleira/caleira-signature-massage",
+          "image": {
+            "path": "src/assets/massage.jpg",
+            "alt": "A provider cradling a guest's neck and shoulder with both hands in a candlelit room.",
+            "position": "35% center"
+          }
+        }
+      ]
+    },
+    {
+      "id": "body",
+      "name": "Body",
+      "intro": "Hands-on sculpting sessions for the body, calm and unhurried.",
+      "comingSoon": false,
+      "note": "Body contouring is cosmetic. Individual experiences vary.",
+      "services": [
+        {
+          "slug": "caleira-sculpt-360-brazilian-experience",
+          "name": "CALÉIRA Sculpt 360° Brazilian Experience",
+          "durationText": "90 min",
+          "description": "A signature Brazilian-inspired bodywork session that pairs rhythmic massage with cosmetic sculpting techniques. Designed for deep relaxation and a temporarily more refined-looking silhouette. This is a cosmetic service, not a medical one.",
+          "idealFor": "Guests who want full-body relaxation with a sculpting focus.",
+          "note": null,
+          "priceText": "$275",
+          "tag": null,
+          "status": "available",
+          "bookable": true,
+          "calLink": "caleira/caleira-sculpt-360-brazilian-experience",
+          "image": {
+            "path": "src/assets/shoulder-exfol.jpg",
+            "alt": "Two hands smoothing cream across a guest's shoulder beside a folded white towel.",
+            "position": null
+          }
         }
       ]
     },

@@ -2,10 +2,16 @@
 import type { StaticImageData } from "next/image";
 import image0 from "@/assets/Kim02.jpg";
 import image1 from "@/assets/facial.jpg";
-import image2 from "@/assets/waxing-closeup.jpg";
+import image2 from "@/assets/lympho.jpg";
+import image3 from "@/assets/massage.jpg";
+import image4 from "@/assets/shoulder-exfol.jpg";
+import image5 from "@/assets/waxing-closeup.jpg";
 
 export const serviceImages: Record<string, StaticImageData> = {
   "src/assets/Kim02.jpg": image0,
   "src/assets/facial.jpg": image1,
-  "src/assets/waxing-closeup.jpg": image2,
+  "src/assets/lympho.jpg": image2,
+  "src/assets/massage.jpg": image3,
+  "src/assets/shoulder-exfol.jpg": image4,
+  "src/assets/waxing-closeup.jpg": image5,
 };

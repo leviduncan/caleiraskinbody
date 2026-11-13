@@ -8,7 +8,7 @@ Read this whole file, then `AGENTS.md`, `README.md` and the memory notes before 
 2. **All copy lives in `src/content/site.ts`**, except the founder block at the top of `src/components/sections/About.tsx` and the services menu (Cal.com plus `services.config.json`).
 3. **Compliance rules override design and copy choices:**
    - No invented testimonials, names, reviews, licenses, prices or credentials. If a fact is not supplied, leave the placeholder and keep the section hidden.
-   - Massage is waitlist only: no price, no booking link.
+   - Massage is bookable now that Kim's MA and MM licenses exist (`guard.neverBookable` is empty). Keep massage copy relaxation-focused with no outcome claims.
    - No medical claims, outcome promises or diagnosis language. Say "guests", never "patients".
    - No em-dashes. Always write CALÉIRA in capitals with the accent.
    - License wording is limited to the real numbers in `licenses` (`src/content/site.ts`): Florida Licensed Massage Therapist MA58353 and Massage Establishment MM48209. No other credential claims, such as "licensed esthetician", unless Kim supplies them.
@@ -44,12 +44,9 @@ The footer links `#privacy` and `#terms` are hidden because the pages do not exi
 - Point the footer `legalLinks` in `site.ts` at `/privacy/` and `/terms/`, and remove `#privacy` and `#terms` from `UNBUILT_ANCHORS` in `section-readiness.ts`.
 - Make sure `robots.ts` and any metadata still work; add page-level `metadata` titles.
 
-### 3. Waitlist for massage (build the mechanism, needs one decision)
+### 3. Waitlist for massage (no longer needed)
 
-Massage is waitlist-only and the "Join the waitlist" links (Services section, FAQ "Do you offer massage?") are hidden because they point at `#waitlist-todo`.
-- Ask the user which they want: (a) a small email form posting to an n8n webhook, same shape as `FreebieForm`; (b) a Cal.com/other hosted form link; (c) a mailto link to `hello@caleiraskinbody.com`. Recommend (a) if the Freebie webhook is being built anyway, otherwise (c) as the zero-infrastructure option.
-- Implement it, set `services.waitlist.href` and the FAQ `link.href` in `site.ts`, and remove `#waitlist-todo` from `UNBUILT_ANCHORS` once it works.
-- A waitlist collects email only. No price, no booking link, no claim massage is available. If it collects a first name or phone number, add a consent line like the Freebie form has.
+Massage, Sculpt 360 and Facial Sculpt are bookable through Cal.com, and the FAQ "Do you offer massage?" now links to `#services`. A waitlist is only needed if a future service launches as coming soon; `services.waitlist` and `#waitlist-todo` stay in place for that.
 
 ### 4. Freebie lead magnet (NEEDS KIM, plus an n8n webhook)
 

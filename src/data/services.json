@@ -26,6 +26,30 @@
       "description": "A professional Brazilian waxing experience featuring careful hair removal, attention to comfort, and soothing finishing care. Enjoy smooth, beautifully maintained skin.",
       "bookingUrl": "https://cal.com/caleira/caleira-brazilian-wax",
       "priceCents": 7500
+    },
+    {
+      "title": "Caléira Signature Massage",
+      "slug": "caleira-signature-massage",
+      "durationMinutes": 90,
+      "description": "Indulge in 90 minutes of personalized full-body relaxation massage featuring customized pressure, flowing movements, and attentive care.",
+      "bookingUrl": "https://cal.com/caleira/caleira-signature-massage",
+      "priceCents": 22500
+    },
+    {
+      "title": "Caléira Sculpt 360° Brazilian Experience",
+      "slug": "caleira-sculpt-360-brazilian-experience",
+      "durationMinutes": 90,
+      "description": "Experience Caléira's signature Brazilian-inspired bodywork combining rhythmic massage, gentle lymphatic-inspired movements, and targeted cosmetic sculpting techniques.",
+      "bookingUrl": "https://cal.com/caleira/caleira-sculpt-360-brazilian-experience",
+      "priceCents": 27500
+    },
+    {
+      "title": "Caléira Facial Sculpt",
+      "slug": "caleira-facial-sculpt",
+      "durationMinutes": 60,
+      "description": "A signature facial combining specialized sculpting massage and personalized skincare.",
+      "bookingUrl": "https://cal.com/caleira/caleira-facial-sculpt",
+      "priceCents": 17500
     }
   ]
 }

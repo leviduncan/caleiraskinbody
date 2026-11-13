@@ -427,8 +427,8 @@ export const site: SiteContent = {
       {
         question: "Do you offer massage?",
         answer:
-          "Massage is coming soon. Join the waitlist from the menu to be among the first to hear when it opens.",
-        link: { label: "Join the waitlist", href: "#waitlist-todo" },
+          "Yes. The CALÉIRA Signature Massage is a 90-minute full-body massage, and the Sculpt 360° Brazilian Experience pairs massage with cosmetic sculpting. Both can be booked online from the menu.",
+        link: { label: "See the menu", href: "#services" },
       },
       {
         question: "How do I cancel or reschedule?",

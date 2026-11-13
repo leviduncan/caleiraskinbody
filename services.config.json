@@ -1,12 +1,8 @@
 {
   "_readme": "Local overrides for what Cal.com cannot supply. Services are keyed by Cal.com event slug. Category order and the order of slugs inside a category set the page order. See the README section 'Services menu'.",
   "guard": {
-    "_note": "Any service whose slug or name contains one of these words must be coming-soon, or the build stops.",
-    "neverBookable": [
-      "massage",
-      "sculpt-360",
-      "sculpt 360"
-    ]
+    "_note": "Any service whose slug or name contains one of these words must be coming-soon, or the build stops. Emptied once Kim's MA and MM licenses were issued; massage is now bookable.",
+    "neverBookable": []
   },
   "categories": [
     {
@@ -22,7 +18,25 @@
       "name": "Face",
       "intro": "Unhurried facials, shaped around your skin on the day.",
       "services": [
-        "60min"
+        "60min",
+        "caleira-facial-sculpt"
+      ]
+    },
+    {
+      "id": "massage",
+      "name": "Massage",
+      "intro": "Slow hands and full attention, from first touch to last.",
+      "services": [
+        "caleira-signature-massage"
+      ]
+    },
+    {
+      "id": "body",
+      "name": "Body",
+      "intro": "Hands-on sculpting sessions for the body, calm and unhurried.",
+      "note": "Body contouring is cosmetic. Individual experiences vary.",
+      "services": [
+        "caleira-sculpt-360-brazilian-experience"
       ]
     },
     {
@@ -62,76 +76,53 @@
         "path": "src/assets/waxing-closeup.jpg",
         "alt": "Gloved hands smoothing warm golden wax along a guest's lower leg with a wooden spatula."
       }
+    },
+    "caleira-facial-sculpt": {
+      "name": "CALÉIRA Facial Sculpt",
+      "description": "A sculpting facial with targeted massage techniques and deep hydration, designed to leave you feeling relaxed with a refreshed, rested look.",
+      "idealFor": "Special events and a little extra facial relaxation.",
+      "image": {
+        "path": "src/assets/lympho.jpg",
+        "alt": "A provider resting both hands along a guest's collarbone in a candlelit treatment room.",
+        "position": "50% 40%"
+      }
+    },
+    "caleira-signature-massage": {
+      "name": "CALÉIRA Signature Massage",
+      "description": "A 90-minute full-body massage with pressure tailored to you, flowing movements and attentive care. An unhurried escape designed for deep relaxation.",
+      "idealFor": "Guests who want a long, unhurried hour and a half to unwind.",
+      "image": {
+        "path": "src/assets/massage.jpg",
+        "alt": "A provider cradling a guest's neck and shoulder with both hands in a candlelit room.",
+        "position": "35% center"
+      }
+    },
+    "caleira-sculpt-360-brazilian-experience": {
+      "name": "CALÉIRA Sculpt 360° Brazilian Experience",
+      "description": "A signature Brazilian-inspired bodywork session that pairs rhythmic massage with cosmetic sculpting techniques. Designed for deep relaxation and a temporarily more refined-looking silhouette. This is a cosmetic service, not a medical one.",
+      "idealFor": "Guests who want full-body relaxation with a sculpting focus.",
+      "image": {
+        "path": "src/assets/shoulder-exfol.jpg",
+        "alt": "Two hands smoothing cream across a guest's shoulder beside a folded white towel."
+      }
     }
   },
   "dormant": {
     "_note": "Not rendered. Move an entry back into categories and services to restore it. Dormant slugs are ignored by the build, including the unplaced warning.",
     "categories": [
       {
-        "id": "face-dormant-services",
-        "_note": "Services removed from category \"face\"",
-        "services": [
-          "caleira-facial-sculpt"
-        ]
-      },
-      {
         "id": "wax-dormant-services",
         "_note": "Services removed from category \"wax\"",
         "services": [
           "caleira-executive-grooming"
         ]
-      },
-      {
-        "id": "massage",
-        "name": "Massage",
-        "intro": "Slow hands and full attention, from first touch to last.",
-        "comingSoon": true,
-        "image": {
-          "path": "src/assets/massage.jpg",
-          "alt": "A provider cradling a guest's neck and shoulder with both hands in a candlelit room.",
-          "position": "35% center"
-        },
-        "services": [
-          "signature-massage"
-        ]
-      },
-      {
-        "id": "body",
-        "name": "Body",
-        "intro": "Hands-on sculpting sessions for the body, calm and unhurried.",
-        "comingSoon": true,
-        "note": "Body contouring is cosmetic. Individual experiences vary.",
-        "image": {
-          "path": "src/assets/shoulder-exfol.jpg",
-          "alt": "Two hands smoothing cream across a guest's shoulder beside a folded white towel."
-        },
-        "services": [
-          "sculpt-360"
-        ]
       }
     ],
     "services": {
-      "caleira-facial-sculpt": {
-        "name": "CALÉIRA Facial Sculpt",
-        "description": "A sculpting facial with targeted massage techniques and deep hydration, designed to leave you feeling relaxed with a refreshed, rested look.",
-        "idealFor": "Special events and a little extra facial relaxation."
-      },
       "caleira-executive-grooming": {
         "name": "CALÉIRA Executive Grooming",
         "description": "A quick, polished grooming visit with professional eyebrow shaping and your choice of upper-lip or chin waxing, finished with soothing post-wax care.",
         "idealFor": "Busy professionals who want a polished look without a long appointment."
-      },
-      "signature-massage": {
-        "status": "coming-soon",
-        "name": "CALÉIRA Signature Massage",
-        "durationText": "90 min",
-        "description": "A 90-minute full-body massage tailored to your pressure and preferences. Launching soon."
-      },
-      "sculpt-360": {
-        "status": "coming-soon",
-        "name": "CALÉIRA Sculpt 360",
-        "durationText": "90 min",
-        "description": "A personalized body-care experience that pairs studio-grade technology with calm, unhurried care. Launching soon."
       }
     }
   }

@@ -48,7 +48,7 @@ The menu is built at build time from two sources, then merged:
 **What never renders, by design**
 - Hidden Cal.com event types, and event types not listed in the config. The build prints which ones were left off.
 - A Cal.com description that contains outcome, medical or dash wording, unless the config supplies approved copy. The build warns when it holds one back.
-- Any price, link or Book button on a `coming-soon` service or inside a `comingSoon` category. These entries are local only and ignore Cal.com. `guard.neverBookable` stops the build if a massage-like service is not coming soon.
+- Any price, link or Book button on a `coming-soon` service or inside a `comingSoon` category. These entries are local only and ignore Cal.com. `guard.neverBookable` stops the build if a listed word appears in a service that is not coming soon (empty now that massage is licensed and bookable).
 - `dormant` in `services.config.json` parks services and categories that should not render (massage, body, facial sculpt, executive grooming). Move an entry back into `categories` and `services` to restore it. Each service carries its own `image`; cards alternate photo left and right by position down the page.
 - If the API fails while `CAL_API_KEY` is set, the fetch prints a loud "SERVICES MAY BE STALE" banner (with the age of the cached file) and exits 1, so `dev` and `build` stop. With no key set (CI, a fresh clone) it warns and keeps the last good `services.json`.
 
@@ -108,6 +108,6 @@ Everything in `[square brackets]` in `src/content/site.ts` still needs real cont
 - No em-dashes.
 - No medical claims, outcome promises, or diagnosis language.
 - "Guests", never "patients".
-- Massage is waitlist only: no price, no booking link.
+- Massage is bookable now that Kim's MA and MM licenses exist (`guard.neverBookable` is empty). Keep massage copy relaxation-focused with no outcome claims.
 - Nothing implies a license, signature, or live service that does not exist yet.
 - Always CALÉIRA, in capitals with the accent.
