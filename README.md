@@ -86,7 +86,6 @@ Everything in `[square brackets]` in `src/content/site.ts` still needs real cont
 - Instagram URL: `https://instagram.com/[handle]`
 - Facebook URL: `https://facebook.com/[page]`
 - Waitlist link (`#waitlist-todo`)
-- "Site by GrowClientsAI" has no link yet (plain text)
 
 **Business details**
 - `[Phone number]`, `[Email address]` (Visit section). The phone must match the one registered with the Florida Department of Health.

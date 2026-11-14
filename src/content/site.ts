@@ -522,6 +522,6 @@ export const site: SiteContent = {
       { label: "Privacy", href: "/privacy/" },
       { label: "Terms", href: "/terms/" },
     ],
-    credit: { label: "Site by GrowClientsAI" },
+    credit: { label: "Site by GrowClientsAI", href: "https://growclientsai.com/" },
   },
 };

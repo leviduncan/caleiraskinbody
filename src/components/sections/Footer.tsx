@@ -78,8 +78,14 @@ export function Footer({ linkBase = "" }: FooterProps) {
               ))}
               <li>
                 {footer.credit.href ? (
-                  <a href={footer.credit.href} className={footerLink}>
+                  <a
+                    href={footer.credit.href}
+                    className={footerLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {footer.credit.label}
+                    <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                 ) : (
                   <span>{footer.credit.label}</span>
