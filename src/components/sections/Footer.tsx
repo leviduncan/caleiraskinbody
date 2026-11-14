@@ -1,11 +1,17 @@
 import { site } from "@/content/site";
 import { Logo } from "@/components/ui/Logo";
 import { isLinkLive } from "@/lib/section-readiness";
+import { withBase } from "@/lib/links";
 
 const footerLink =
   "inline-flex min-h-11 min-w-11 items-center transition-colors duration-400 hover:text-ink-on-deep";
 
-export function Footer() {
+interface FooterProps {
+  /** "/" on pages other than home, so in-page links such as #services go back to the home page. */
+  linkBase?: string;
+}
+
+export function Footer({ linkBase = "" }: FooterProps) {
   const { brand, footer } = site;
   return (
     // The darkest brand brown, with the logo kit's dark set and the on-deep text colors.
@@ -39,7 +45,7 @@ export function Footer() {
                   return (
                     <li key={line.label}>
                       <a
-                        href={line.href}
+                        href={withBase(line.href, linkBase)}
                         className={footerLink}
                         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       >

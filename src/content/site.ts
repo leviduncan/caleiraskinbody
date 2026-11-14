@@ -519,9 +519,8 @@ export const site: SiteContent = {
     licenses: `Massage Therapist: ${licenses.therapist} · Massage Establishment: ${licenses.establishment}`,
     copyright: "© 2026 CALÉIRA Skin & Body. All rights reserved.",
     legalLinks: [
-      // TODO: replace with real Privacy and Terms pages.
-      { label: "Privacy", href: "#privacy" },
-      { label: "Terms", href: "#terms" },
+      { label: "Privacy", href: "/privacy/" },
+      { label: "Terms", href: "/terms/" },
     ],
     credit: { label: "Site by GrowClientsAI" },
   },

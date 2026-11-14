@@ -85,7 +85,6 @@ Everything in `[square brackets]` in `src/content/site.ts` still needs real cont
 - Google reviews URL: `https://g.page/[google-business-id]`
 - Instagram URL: `https://instagram.com/[handle]`
 - Facebook URL: `https://facebook.com/[page]`
-- Privacy page (`#privacy`) and Terms page (`#terms`)
 - Waitlist link (`#waitlist-todo`)
 - "Site by GrowClientsAI" has no link yet (plain text)
 

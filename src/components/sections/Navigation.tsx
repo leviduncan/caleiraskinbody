@@ -5,6 +5,7 @@ import { site } from "@/content/site";
 import { isLinkLive } from "@/lib/section-readiness";
 import { BookButton } from "@/components/booking/BookButton";
 import { Logo } from "@/components/ui/Logo";
+import { withBase } from "@/lib/links";
 
 /** How far the page scrolls before the header turns from clear to glass. */
 const SCROLL_THRESHOLD = 24;
@@ -27,7 +28,12 @@ function useScrolled() {
  * Once the page scrolls it becomes a frosted coquina bar with the mahogany logo.
  * Under 768px the links collapse; the logo and Book now stay.
  */
-export function Navigation() {
+interface NavigationProps {
+  /** "/" on pages other than home, so in-page links such as #services go back to the home page. */
+  linkBase?: string;
+}
+
+export function Navigation({ linkBase = "" }: NavigationProps) {
   const { brand, booking, navigation } = site;
   const scrolled = useScrolled();
 
@@ -51,7 +57,7 @@ export function Navigation() {
       <div className="container-x relative flex items-center justify-between gap-4 py-1.5">
         {/* The negative margin offsets the logo's built-in clear space so the arch meets the gutter. */}
         <a
-          href="#top"
+          href={`${linkBase}#top`}
           aria-label={`${brand.name} ${brand.descriptor}, back to top`}
           className="relative -ml-2.5 inline-flex shrink-0 items-center md:-ml-3.5 lg:-ml-4"
         >
@@ -76,7 +82,7 @@ export function Navigation() {
             {navigation.links.filter((link) => isLinkLive(link.href)).map((link) => (
               <li key={link.href}>
                 <a
-                  href={link.href}
+                  href={withBase(link.href, linkBase)}
                   className={`inline-flex min-h-11 min-w-11 items-center justify-center px-1.5 text-xs font-medium tracking-[0.2em] uppercase transition-colors duration-400 ${
                     scrolled
                       ? "text-ink hover:text-champagne-ink"

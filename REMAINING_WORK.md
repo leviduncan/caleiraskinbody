@@ -21,7 +21,7 @@ Read this whole file, then `AGENTS.md`, `README.md` and the memory notes before 
 
 Full one-page site, Cal.com booking popup and services menu, static export with image optimization, FTP deploy workflow, coming-soon page, staging-to-live swap (`SWAP.md` is a historical record), phone `(727) 292-1807`, email `hello@caleiraskinbody.com`, address, hours, the voice assistant as a phone link (`tel:+17272921807`), Kim's portrait and bio text.
 
-Sections that hide themselves until their content is real (`src/lib/section-readiness.ts`): Testimonial, Freebie, "Read more on Google" link, and any link to `#privacy`, `#terms`, `#waitlist-todo`.
+Sections that hide themselves until their content is real (`src/lib/section-readiness.ts`): Testimonial, Freebie, "Read more on Google" link, and any link to `#waitlist-todo`.
 
 ## Tasks
 
@@ -36,7 +36,10 @@ Work top to bottom. Tasks 1 to 3 need no outside information; do them first.
 - `.github/workflows/deploy.yml` still carries the commented-out "STAGING ONLY" `SITE_ENV` / `SITE_URL` lines and a stale comment. Delete those lines and mention `SWAP.md` as done. Keep `server-dir: ./` and the sync-state file name exactly as they are.
 - Add a short note to `SWAP.md` or the README that `FTP_SERVER_DIR` secret is unused and can be deleted by the user in GitHub (you cannot do this).
 
-### 2. Privacy and Terms pages (build them, but copy needs review)
+### 2. Privacy and Terms pages (DONE)
+
+Built at `/privacy/` and `/terms/` from Kim's documents; the text lives in `src/content/legal.ts`. The notes below are kept for history.
+
 
 The footer links `#privacy` and `#terms` are hidden because the pages do not exist.
 - Add `src/app/privacy/page.tsx` and `src/app/terms/page.tsx` (static export, so they must be statically renderable; use `trailingSlash` behaviour already set in `next.config.ts`). Reuse `Navigation`, `Footer`, `PageBackdrop` and the existing typography classes; no new colors.

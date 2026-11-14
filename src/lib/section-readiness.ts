@@ -49,7 +49,7 @@ export function isReady(text: string | undefined): boolean {
 }
 
 /** Anchors for pages and forms that are not built yet. Remove one when it exists. */
-const UNBUILT_ANCHORS = ["#privacy", "#terms", "#waitlist-todo"];
+const UNBUILT_ANCHORS = ["#waitlist-todo"];
 
 /** In-page anchors that currently point at nothing, so links to them are dropped. */
 export function getHiddenAnchors(): string[] {

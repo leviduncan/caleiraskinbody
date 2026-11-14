@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Static export for shared hosting. Run `npm run build`, upload the `out` folder.
   output: "export",
+  // Each page exports as its own folder (privacy/index.html), so /privacy/ works on any host.
+  trailingSlash: true,
   // Hides the round Next.js badge shown in the corner during development.
   devIndicators: false,
   images: {
